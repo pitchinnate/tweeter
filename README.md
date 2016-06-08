@@ -6,7 +6,7 @@ Here is a list of endpoints we will use.
 ```
 GET /users/oauth
  
-Hit this endpoint to get the oauth url to send people to (Run this from a popup window)
+Open this url in a popup.
 
 Headers
   //nothing required
@@ -15,9 +15,7 @@ Sent to server
   //nothing
   
 Response from server
-  {
-    url: "http://example.com"
-  }
+  //just sends the user to login via twitter
 ```
 
 ```

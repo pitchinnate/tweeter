@@ -3,24 +3,29 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Watson\Validating\ValidatingTrait;
+
+/**
+ * Class User
+ * @package App
+ * @property integer $id
+ * @property string $name
+ * @property string $twitter_id
+ * @property string $picture
+ * @property string $created_at
+ * @property string $updated_at
+ */
 
 class User extends Authenticatable
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    use ValidatingTrait;
+    protected $table = 'users';
+    protected $fillable = ['name', 'twitter_id', 'picture'];
+    protected $hidden = ['twitter_id'];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
+    protected $rules = [
+        'name' => 'string|required|unique',
+        'twitter_id' => 'string|required|unique',
+        'picture' => 'string'
     ];
 }
