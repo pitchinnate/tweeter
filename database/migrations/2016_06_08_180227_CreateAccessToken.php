@@ -14,8 +14,8 @@ class CreateAccessToken extends Migration {
         Schema::create('access_tokens', function($table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('access_token');
-            $table->dateTime('valid_until');
+            $table->text('access_token');
+            $table->string('access_token_sha1');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
@@ -28,7 +28,7 @@ class CreateAccessToken extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('access_token');
+        Schema::drop('access_tokens');
     }
 
 }

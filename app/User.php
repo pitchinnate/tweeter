@@ -14,6 +14,8 @@ use Watson\Validating\ValidatingTrait;
  * @property string $picture
  * @property string $created_at
  * @property string $updated_at
+ *
+ * @property Tweet[] $tweets
  */
 
 class User extends Authenticatable
@@ -28,4 +30,9 @@ class User extends Authenticatable
         'twitter_id' => 'string|required|unique',
         'picture' => 'string'
     ];
+
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
+    }
 }

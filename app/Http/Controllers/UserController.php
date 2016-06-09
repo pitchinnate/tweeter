@@ -52,16 +52,31 @@ class UserController extends Controller
                 $user->picture = $credentials->profile_image_url;
                 $user->save();
             }
-            $accessToken = new AccessToken([
-                'user_id' => $user->id,
-                'access_token' => json_encode($token),
-                'valid_until' => date('Y-m-d H:i:s',strtotime('now +12 hours')),
-            ]);
-            $accessToken->save();
+            $accessToken = AccessToken::where('user_id','=',$user->id)->first();
+            if(!$accessToken) {
+                $accessToken = new AccessToken([
+                    'user_id' => $user->id,
+                    'access_token' => json_encode($token),
+                    'access_token_sha1' => sha1(json_encode($token)),
+                ]);
+                $accessToken->save();
+            } else {
+                //check if access token needs updated
+                if($accessToken->access_token_sha1 != sha1(json_encode($token))) {
+                    $accessToken->access_token = json_encode($token);
+                    $accessToken->access_token_sha1 = sha1(json_encode($token));;
+                    $accessToken->save();
+                }
+            }
             return view('users.close',[
                 'uid' => $user->name,
-                'token' => sha1($accessToken->access_token),
+                'token' => $accessToken->access_token_sha1,
             ]);
         }
+    }
+
+    public function getStatus(Request $request)
+    {
+        return $request->user()->toArray();
     }
 }
