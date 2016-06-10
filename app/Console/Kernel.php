@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Tweet;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,7 +25,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function () {
+            $tweets = Tweet::where('scheduled','<=',date('Y-m-d H:i:s'))
+                ->where('status','=','scheduled')->get();
+            foreach($tweets as $tweet) {
+                $tweet->sendViaApi();
+            }
+        })->everyMinute();
     }
 }

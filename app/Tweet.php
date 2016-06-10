@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
+use Thujohn\Twitter\Facades\Twitter;
 
 /**
  * @property integer $id
@@ -32,7 +33,23 @@ class Tweet extends Model
         'scheduled.future' => "Scheduled date must be in the future."
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
+    }
+
+    public function sendViaApi()
+    {
+        /** @var AccessToken $accessToken */
+        $accessToken = AccessToken::where('user_id','=',$this->user_id)->first();
+        $token = json_decode($accessToken->access_token,true);
+        Twitter::reconfig(['token'=>$token['oauth_token'], 'secret'=> $token['oauth_token_secret']]);
+        try {
+            Twitter::postTweet(['status' => $this->message, 'format' => 'json']);
+            $this->status = "posted";
+            $this->forceSave();
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+        }
     }
 }
