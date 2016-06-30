@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AccessControl;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -51,5 +52,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'oauth' => \App\Http\Middleware\OauthMiddleware::class,
         'tweet' => \App\Http\Middleware\TweetAccess::class,
+        'cors' => AccessControl::class,
     ];
 }
