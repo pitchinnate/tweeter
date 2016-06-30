@@ -2,8 +2,8 @@
     var uid = "{{$uid}}";
     var token = "{{$token}}";
     //call parent function here sending uid and token
-    //parent.sendToken(uid,token);
+    parent.sendToken(token,'Bearer',uid);
     //close myself
-    //self.close();
+    self.close();
 </script>
 Login Successful!
