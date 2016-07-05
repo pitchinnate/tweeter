@@ -68,10 +68,7 @@ class UserController extends Controller
                     $accessToken->save();
                 }
             }
-            return view('users.close',[
-                'uid' => $user->name,
-                'token' => $accessToken->access_token_sha1,
-            ]);
+            return redirect("http://localhost:4200?code=" . $accessToken->access_token_sha1);
         }
     }
 
