@@ -11,16 +11,13 @@ use App\AccessToken;
 class OauthMiddleware {
     public function handle(Request $request, Closure $next) {
         if($request->headers->has('access-token')) {
-            $user = User::where('name','=',$request->headers->get('uid'))->first();
-            if($user) {
-                $access_token_count = AccessToken::where('user_id','=',$user->id)
-                    ->where('access_token_sha1','=',$request->headers->get('access-token'))->count();
-                if($access_token_count == 0) {
-                    return (new Response('Invalid Access Token', 400));
-                }
-            } else {
-                return (new Response('User not found', 400));
+            /** @var AccessToken $access_token */
+            $access_token = AccessToken::where('access_token_sha1','=',$request->headers->get('access-token'))
+                ->first();
+            if(!$access_token) {
+                return (new Response('Invalid Access Token', 400));
             }
+            $user = $access_token->user;
         } else {
             return (new Response('Invalid Access Token', 400));
         }
