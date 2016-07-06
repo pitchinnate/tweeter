@@ -3,7 +3,7 @@
 Route::get('/users/oauth','UserController@getLink');
 Route::get('/users/oauth/return',['as'=>'twitter.callback','uses'=>'UserController@returnOauth']);
 
-Route::group(['middleware' => ['cors','oauth']],function(){
+Route::group(['middleware' => ['oauth']],function(){
     Route::get('/users/me','UserController@getStatus');
     Route::get('/tweets','TweetController@getIndex');
     Route::post('/tweets','TweetController@postTweet');
