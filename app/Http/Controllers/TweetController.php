@@ -58,6 +58,6 @@ class TweetController extends Controller
     {
         $tweet = Tweet::findOrFail($id);
         $tweet->delete();
-        return (new Response('',200));
+        return (new Response([],200));
     }
 }
