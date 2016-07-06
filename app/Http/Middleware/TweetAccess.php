@@ -18,7 +18,7 @@ class TweetAccess
     public function handle($request, Closure $next)
     {
         $tweet = Tweet::findOrFail($request->id);
-        if($tweet->user_id !== $request->user()->id) {
+        if($tweet->user_id != $request->user()->id) {
             return (new Response(['errors'=>['Access Denied']]));
         }
         return $next($request);
