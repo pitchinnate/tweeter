@@ -19,9 +19,8 @@ Response from server
 ```
 
 ```
-When we get a response from the oauth it will hit the api and will call a javascript function to close the popup and send
-the access-token, token-type, and uid to the main application. Which will be stored and sent as a header with every request
-after.
+When we get a response from twitter it will then redirect back to the frontend sending the access-token as a url parameter. The frontend
+will then store the access-token in local storage and close that popup window.
 ```
 
 ```
@@ -31,9 +30,7 @@ Get the current user logged in
 
 Headers
   {
-    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks',
-    token-type: 'Bearer',
-    uid: 'twitterhandle'
+    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks'
   }
   
 Sent to server
@@ -56,9 +53,7 @@ Get the list of tweets the user has scheduled
 
 Headers
   {
-    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks',
-    token-type: 'Bearer',
-    uid: 'twitterhandle'
+    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks'
   }
   
 Sent to server
@@ -92,9 +87,7 @@ Get a single scheduled tweet
 
 Headers
   {
-    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks',
-    token-type: 'Bearer',
-    uid: 'twitterhandle'
+    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks'
   }
   
 Sent to server
@@ -126,9 +119,7 @@ Create a new scheduled tweet
 
 Headers
   {
-    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks',
-    token-type: 'Bearer',
-    uid: 'twitterhandle'
+    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks'
   }
   
 Sent to server
@@ -165,9 +156,7 @@ Update a scheduled tweet
 
 Headers
   {
-    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks',
-    token-type: 'Bearer',
-    uid: 'twitterhandle'
+    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks'
   }
   
 Sent to server
@@ -204,9 +193,7 @@ Delete a scheduled tweet
 
 Headers
   {
-    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks',
-    token-type: 'Bearer',
-    uid: 'twitterhandle'
+    access-token: 'akldfjaldfjaldkfasdlfasdlfajldks'
   }
   
 Sent to server
