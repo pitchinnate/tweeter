@@ -57,6 +57,8 @@ class Tweet extends Model
     {
         $returnArray = $this->toArray();
         $returnArray['scheduled'] = date('c',strtotime($this->scheduled));
+        $returnArray['created_at'] = date('c',strtotime($this->created_at));
+        $returnArray['updated_at'] = date('c',strtotime($this->updated_at));
         return $returnArray;
     }
 }
