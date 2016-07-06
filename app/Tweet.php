@@ -56,9 +56,12 @@ class Tweet extends Model
     public function returnArray()
     {
         $returnArray = $this->toArray();
-        $returnArray['scheduled'] = date('c',strtotime($this->scheduled));
-        $returnArray['created_at'] = date('c',strtotime($this->created_at));
-        $returnArray['updated_at'] = date('c',strtotime($this->updated_at));
+        $scheduled = new \DateTime($this->scheduled,new \DateTimeZone('UTC'));
+        $returnArray['scheduled'] = $scheduled->format('c');
+        $created = new \DateTime($this->created_at,new \DateTimeZone('UTC'));
+        $returnArray['created_at'] = $created->format('c');
+        $updated = new \DateTime($this->updated_at,new \DateTimeZone('UTC'));
+        $returnArray['updated_at'] = $updated->format('c');
         return $returnArray;
     }
 }
