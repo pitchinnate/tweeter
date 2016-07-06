@@ -12,8 +12,13 @@ class TweetController extends Controller
 {
     public function getIndex(Request $request)
     {
+        $tweets = [];
+        $allTweets = $request->user()->tweets;
+        foreach($allTweets as $tweet) {
+            $tweets[] = $tweet->returnArray();
+        }
         return [
-            'tweets' => $request->user()->tweets,
+            'tweets' => $tweets,
         ];
     }
 
