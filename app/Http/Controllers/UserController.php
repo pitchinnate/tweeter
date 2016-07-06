@@ -68,7 +68,7 @@ class UserController extends Controller
                     $accessToken->save();
                 }
             }
-            return redirect("http://localhost:4200?code=" . $accessToken->access_token_sha1);
+            return redirect("http://localhost:4200/sign-in?code=" . $accessToken->access_token_sha1);
         }
     }
 
