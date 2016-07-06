@@ -29,7 +29,7 @@ class TweetController extends Controller
     public function postTweet(Request $request)
     {
         $tweet = new Tweet();
-        $tweet->fill($request->only('message','scheduled'));
+        $tweet->fill($request->input('tweet',[]));
         $tweet->status = 'scheduled';
         $tweet->user_id = $request->user()->id;
         if($tweet->isInvalid()) {
@@ -44,7 +44,7 @@ class TweetController extends Controller
     public function putTweet(Request $request, $id)
     {
         $tweet = Tweet::findOrFail($id);
-        $tweet->fill($request->only('message','scheduled'));
+        $tweet->fill($request->input('tweet',[]));
         if($tweet->isInvalid()) {
             return (new Response(['errors' => $tweet->getErrors()->all()],400));
         }
