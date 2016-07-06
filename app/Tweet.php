@@ -52,4 +52,11 @@ class Tweet extends Model
             print_r($e->getMessage());
         }
     }
+
+    public function returnArray()
+    {
+        $returnArray = $this->toArray();
+        $returnArray['scheduled'] = date('c',strtotime($this->scheduled));
+        return $returnArray;
+    }
 }

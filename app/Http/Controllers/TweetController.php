@@ -22,7 +22,7 @@ class TweetController extends Controller
         /** @var Tweet $tweet */
         $tweet = Tweet::findOrFail($id);
         return [
-            'tweet' => $tweet->toArray(),
+            'tweet' => $tweet->returnArray(),
         ];
     }
 
@@ -37,7 +37,7 @@ class TweetController extends Controller
         }
         $tweet->save();
         return [
-            'tweet' => $tweet->toArray(),
+            'tweet' => $tweet->returnArray(),
         ];
     }
 
@@ -50,7 +50,7 @@ class TweetController extends Controller
         }
         $tweet->save();
         return [
-            'tweet' => $tweet->toArray(),
+            'tweet' => $tweet->returnArray(),
         ];
     }
 
